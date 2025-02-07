@@ -25,3 +25,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+*.bak
+v0-user-next.config.js
+
+logs/
+*.log
+
+.DS_Store
+Thumbs.db
