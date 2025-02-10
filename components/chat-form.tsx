@@ -11,7 +11,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { SignupPopup } from "./signup-popup"
 import { Header } from "@/components/header"
 import { Unbounded } from "next/font/google"
-import { goChat, goStream } from "@/lib/api"
+import { goChat } from "@/lib/api"
 
 const unbounded = Unbounded({ subsets: ["latin"] })
 
@@ -62,18 +62,14 @@ export function ChatForm() {
 
     setIsLoading(true)
     const userMessage: Message = { role: "user", content: input }
-    setMessages((prev) => [...prev, userMessage])
+    setMessages((prev) => [...prev, userMessage, { role: "assistant", content: "" }])
     setInput("")
     if (textareaRef.current) textareaRef.current.style.height = "auto"
     setIsLandingPage(false)
 
     try
     {
-      await goStream(input, (chunk) => {
-        console.log(chunk);
-       });
-      // const response = await goChat(input)
-      const assistantMessage: Message = { role: "assistant", content: "" }
+      const assistantMessage: Message = { role: "assistant", content: await goChat(input) }
       setMessages((prev) => [...prev, assistantMessage])
     } catch (error) {
       toast({
