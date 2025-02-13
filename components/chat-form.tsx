@@ -48,7 +48,7 @@ export function ChatForm() {
       container.addEventListener("scroll", handleScroll)
       return () => container.removeEventListener("scroll", handleScroll)
     }
-  }, [messagesContainerRef, handleScroll]) // add handleScroll to dependencies
+  }, [messagesContainerRef, handleScroll])
 
   useEffect(() => {
     if (!isLandingPage) {
@@ -114,7 +114,7 @@ export function ChatForm() {
               </div>
             ) : (
               <div className="flex-1 overflow-hidden relative">
-                <div ref={messagesContainerRef} className="absolute inset-0 overflow-y-auto scrollbar-custom p-4">
+                <div ref={messagesContainerRef} className="absolute inset-0 overflow-y-auto scrollbar-custom p-16">
                   <div className="flex flex-col space-y-4">
                     {messages.map((message, index) => (
                       <div

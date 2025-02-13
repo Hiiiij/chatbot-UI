@@ -1,8 +1,7 @@
 import axios from "axios";
 import { fetchEventSource } from "@microsoft/fetch-event-source";
 
-const apiKey =
-  "a7d93eded416cfc6631847132dab0ef8226d2854c865284da5c0d107e3af96b2";
+const apiKey = process.env.NEXT_PUBLIC_API_KEY;
 
 const api = axios.create({
   baseURL: "http://localhost:8080",
@@ -19,7 +18,10 @@ export async function goChat(message: string): Promise<string> {
   }
 }
 
-export async function goStream(message: string, cb: (chunk: string) => void): Promise<void> {
+export async function goStream(
+  message: string,
+  cb: (chunk: string) => void
+): Promise<void> {
   const ctrl = new AbortController();
 
   return new Promise((resolve, reject) => {
@@ -27,7 +29,7 @@ export async function goStream(message: string, cb: (chunk: string) => void): Pr
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "X-API-KEY": apiKey
+        "X-API-KEY": process.env.NEXT_PUBLIC_API_KEY || "",
       },
       body: JSON.stringify({
         message: message,

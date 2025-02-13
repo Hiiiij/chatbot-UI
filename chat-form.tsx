@@ -31,7 +31,6 @@ const Messages = () => {
 
   return (
     <div className="messages-container scrollbar-custom flex-1 overflow-y-auto p-4" ref={messagesContainerRef}>
-      {/* Example messages */}
       <div>Message 1</div>
       <div>Message 2</div>
       <div>Message 3</div>
